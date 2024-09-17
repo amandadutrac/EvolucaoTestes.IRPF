@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "MB.Console.PPA.EvolucaoTestes.IRPF/1.0.0": {
+        "runtime": {
+          "MB.Console.PPA.EvolucaoTestes.IRPF.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MB.Console.PPA.EvolucaoTestes.IRPF/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
