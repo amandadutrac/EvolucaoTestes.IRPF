@@ -1,35 +1,66 @@
 ﻿using System;
 
-namespace CalculaImposto;
-class Program
+namespace EvolucaoTestes.IRPF
 {
-    static void Main()
+    class Program
     {
-        Console.Write("Informe o número de contribuintes a calcular: ");
-        if (!int.TryParse(Console.ReadLine(), out int numeroContribuintes) || numeroContribuintes <= 0)
+          static void Main(string[] args)
         {
-          Console.WriteLine("Por favor, informe um valor válido para o número de contribuintes."); 
+            int numeroContribuintes = ValidarDadosEntrada();
+            ProcessarDadosContribuintes(numeroContribuintes);
         }
-    
+
+        static int ValidarDadosEntrada()
+        {
+            int numeroContribuinte;
+            for (;;)
+            {
+                Console.Write("Informe o número de contribuintes a calcular: ");
+                if (int.TryParse(Console.ReadLine(), out numeroContribuinte) && numeroContribuinte > 0)
+                {
+                    return numeroContribuinte;
+                }
+                else
+                {
+                    Console.WriteLine("Por favor, informe um valor válido para o número de contribuintes.");
+                }
+            }
+        }
+
+        static void ProcessarDadosContribuintes(int numeroContribuintes)
+        {
             for (int i = 0; i < numeroContribuintes; i++)
             {
                 Console.WriteLine($"\nContribuinte {i + 1}");
                 Console.WriteLine("Informe o nome do contribuinte: ");
                 string nomeContribuinte = Console.ReadLine() ?? "Desconhecido";
-                
-                Console.WriteLine("Informe um valor válido para salário: ");
-                if (!decimal.TryParse(Console.ReadLine(), out decimal salarioBruto))
-                {
-                    Console.WriteLine("Por favor, informe um valor válido para salário.");
-                }
-                
+
+                decimal salarioBruto = ValidarSalarioEntrada();
+
                 decimal desconto = CalcularDesconto(salarioBruto);
                 decimal salarioLiquido = salarioBruto - desconto;
 
                 Console.WriteLine($"Nome do Contribuinte: {nomeContribuinte}");
-                Console.WriteLine($"Informe um valor válido para salário: R$ {salarioBruto:F2}");
+                Console.WriteLine($"Salário Bruto: R$ {salarioBruto:F2}");
                 Console.WriteLine($"Desconto: R$ {desconto:F2}");
                 Console.WriteLine($"Salário Líquido: R$ {salarioLiquido:F2}");
+            }
+        }
+
+        static decimal ValidarSalarioEntrada()
+        {
+            decimal salarioBruto;
+            for (;;)
+            {
+                Console.Write("Informe um valor válido para salário: ");
+                if (decimal.TryParse(Console.ReadLine(), out salarioBruto) && salarioBruto >= 0)
+                {
+                    return salarioBruto;
+                }
+                else
+                {
+                    Console.WriteLine("Por favor, informe um valor válido para salário.");
+                }
             }
         }
 
@@ -68,3 +99,4 @@ class Program
             return desconto;
         }
     }
+}
